@@ -131,12 +131,12 @@ TextureImporter:
       name: knight dying_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 325
-        width: 98
-        height: 85
+        x: 76
+        y: 326
+        width: 96
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -153,12 +153,12 @@ TextureImporter:
       name: knight dying_1
       rect:
         serializedVersion: 2
-        x: 226
-        y: 314
-        width: 90
-        height: 92
+        x: 227
+        y: 315
+        width: 87
+        height: 90
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,12 +175,12 @@ TextureImporter:
       name: knight dying_2
       rect:
         serializedVersion: 2
-        x: 377
-        y: 306
-        width: 92
-        height: 106
+        x: 378
+        y: 307
+        width: 89
+        height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: knight dying_3
       rect:
         serializedVersion: 2
-        x: 521
-        y: 302
-        width: 93
-        height: 114
+        x: 522
+        y: 303
+        width: 91
+        height: 111
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -219,12 +219,12 @@ TextureImporter:
       name: knight dying_4
       rect:
         serializedVersion: 2
-        x: 673
-        y: 297
-        width: 91
-        height: 113
+        x: 674
+        y: 298
+        width: 88
+        height: 111
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -241,12 +241,12 @@ TextureImporter:
       name: knight dying_5
       rect:
         serializedVersion: 2
-        x: 835
-        y: 310
-        width: 85
-        height: 99
+        x: 836
+        y: 311
+        width: 82
+        height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -263,7 +263,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5ea6e7e4396b10144aa150850372b110
     internalID: 0
     vertices: []
     indices: 
@@ -271,7 +271,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       knight dying_0: 7968067516675999865
       knight dying_1: -8404057661544313938
