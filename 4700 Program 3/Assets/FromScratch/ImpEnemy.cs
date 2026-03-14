@@ -14,29 +14,37 @@ public class ImpEnemy : MonoBehaviour
     [Header("Damage")]
     public int touchDamage = 1;
 
-    private Rigidbody2D rb;
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-
-    private bool movingRight = true;
-    private float hopTimer;
+    [Header("Stomp")]
+    public float stompBounceForce = 10f;
+    public float stompVelocityThreshold = -0.1f;
 
     [Header("Ground Check")]
     public Transform groundCheck;
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.2f);
     public LayerMask groundLayer;
 
+    private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private bool movingRight = true;
+    private float hopTimer;
+    private bool isDead = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         hopTimer = hopCooldown;
     }
 
     void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
+
         Patrol();
         Hop();
         UpdateAnimation();
@@ -46,6 +54,7 @@ public class ImpEnemy : MonoBehaviour
     {
         if (leftPoint == null || rightPoint == null)
         {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             return;
         }
 
@@ -56,7 +65,10 @@ public class ImpEnemy : MonoBehaviour
             if (transform.position.x >= rightPoint.position.x)
             {
                 movingRight = false;
-                spriteRenderer.flipX = true;
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = true;
+                }
             }
         }
         else
@@ -66,7 +78,10 @@ public class ImpEnemy : MonoBehaviour
             if (transform.position.x <= leftPoint.position.x)
             {
                 movingRight = true;
-                spriteRenderer.flipX = false;
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = false;
+                }
             }
         }
     }
@@ -104,18 +119,62 @@ public class ImpEnemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Player"))
         {
+            Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
-            if (playerHealth != null)
+            bool playerIsAbove = collision.transform.position.y > transform.position.y + 0.2f;
+            bool playerIsFalling = false;
+
+            if (playerRb != null)
             {
-                playerHealth.TakeDamage(touchDamage);
+                playerIsFalling = playerRb.linearVelocity.y <= stompVelocityThreshold;
+            }
+
+            if (playerIsAbove && playerIsFalling)
+            {
+                if (playerRb != null)
+                {
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, stompBounceForce);
+                }
+
+                Die();
+            }
+            else
+            {
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(touchDamage);
+                }
             }
         }
     }
 
-    private void OnDrawGizmosSelected()
+    void Die()
+    {
+        isDead = true;
+
+        if (GetComponent<Collider2D>() != null)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.simulated = false;
+        }
+
+        Destroy(gameObject);
+    }
+
+    void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
         {
