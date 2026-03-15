@@ -12,7 +12,7 @@ public class ImpEnemy : MonoBehaviour
     public Transform rightPoint;
 
     [Header("Damage")]
-    public int touchDamage = 1;
+    public int touchDamage = 3;
 
     [Header("Stomp")]
     public float stompBounceForce = 10f;
