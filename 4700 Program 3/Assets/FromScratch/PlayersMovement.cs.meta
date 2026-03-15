@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: c2412ad171fce42efaf5eab2410c191e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - groundCheckPosition: {instanceID: 0}
+  - jumpSound: {fileID: 8300000, guid: 33dc5b0f81092734788e5742b919e428, type: 3}
+  - footstepSound: {fileID: 8300000, guid: 33dc5b0f81092734788e5742b919e428, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class KnightBoss : MonoBehaviour
 {
-    public float moveSpeed = 12f; // High speed so he's not slow!
+    public float moveSpeed = 12f;
     public Transform leftPoint;
     public Transform rightPoint;
     public int health = 3;
-    
+
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
@@ -17,12 +17,17 @@ public class KnightBoss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        if (rb != null) rb.freezeRotation = true;
+
+        if (rb != null)
+            rb.freezeRotation = true;
     }
 
     void Update()
     {
-        if (leftPoint != null && rightPoint != null) Patrol();
+        if (leftPoint != null && rightPoint != null)
+        {
+            Patrol();
+        }
     }
 
     void Patrol()
@@ -42,10 +47,53 @@ public class KnightBoss : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Check if player hit from above
+            if (collision.contacts[0].normal.y < -0.5f)
+            {
+                TakeDamage();
+                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+                if (playerRb != null)
+                {
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 10f);
+                }
+            }
+            else
+            {
+                // Damage player
+                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(1);
+                }
+            }
+        }
+    }
+
+    void TakeDamage()
+    {
+        health--;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
     public void Die()
     {
-        anim.SetTrigger("Die");
-        this.enabled = false;
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+        }
+
         rb.linearVelocity = Vector2.zero;
+        this.enabled = false;
+
+        Destroy(gameObject, 1f);
     }
 }
